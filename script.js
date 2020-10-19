@@ -52,10 +52,6 @@ function setBgGreet() {
 
   setBgGreet();
 
-async function getTown() {
-    
-}
-
 
 async function getWeather() {
     const locationUrl = `https://ipinfo.io/?token=3b4a9ada9d746b`; 
