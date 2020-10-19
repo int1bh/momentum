@@ -109,7 +109,7 @@ async function getQuote() {
     figcaption.textContent = data.quoteAuthor;
     
   }
-  //document.addEventListener('DOMContentLoaded', getQuote);
+  document.addEventListener('DOMContentLoaded', getQuote);
 
 
 async function getCourse() {
