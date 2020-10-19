@@ -104,7 +104,6 @@ async function getQuote() {
     const url = `https://cors-anywhere.herokuapp.com/https://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=ru`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data); 
     blockquote.textContent = data.quoteText;
     figcaption.textContent = data.quoteAuthor;
     
@@ -172,7 +171,7 @@ function getName() {
     }
   }
 
-  name.addEventListener('keypress', setName);
+name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
 focus.addEventListener('keypress', setFocus);
 focus.addEventListener('blur', setFocus);
