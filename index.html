@@ -11,35 +11,43 @@
 </head>
 
 <body>
-    <div class="time">
-        <h1 class="clock">12:10:05</h1>
-        <h2 class="day">Понедельник 19 октября 2020</h2>
-    </div>
+
+
     <div class="weather">
         <h3 class="town"></h3>
         <div class="city">
-            <div class="temperature"></div>
+            <div class="temp-wrapper">
+                <div class="temperature"></div>
+                <div class="weather-description"></div>
+                <div class="feels-like"></div>
+                <div class="wind"></div>
+                <div class="pressure"></div>
+                <div class="humidity"></div>
+            </div>
             <i class="weather-icon owf"></i>
         </div>
-        
-        
-        <div class="weather-description"></div>
-        <div class="feels-like"></div>
-        <div class="wind"></div>
-        <div class="pressure"></div>
-        <div class="humidity"></div>
-    </div>
-    <div class="currency">
-
     </div>
 
-    <figure class="cit">
-        <blockquote>
+    <div class="time"></div>
+    <div class="dateNow"></div>
+    <h2>
+        <span class="greeting"></span>
+        <span class="name" contenteditable="true"></span>
+    </h2>
+    <br>
+    <h3>Какие планы на текущий день?</h3>
+    <br>
+    <h3 class="focus" contenteditable="true"></h3>
 
-        </blockquote>
-        <figcaption>
+    <div class="currency-wrapper">
+        <span>Текущий курс: </span>
+        <span class="currency"></span>
+    </div>
+    
 
-        </figcaption>
+    <figure class="quote">
+        <blockquote>На свете чудес нет, есть только знания, постигаемые нами в той или иной степени.</blockquote>
+        <figcaption>Давид Самойлов</figcaption>
     </figure>
 
     <script src="script.js"></script>

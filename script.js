@@ -1,4 +1,8 @@
 const   time = document.querySelector('.time'),
+        dateNow = document.querySelector('.dateNow'),
+        greeting = document.querySelector('.greeting'),
+        name = document.querySelector('.name'),
+        focus = document.querySelector('.focus');
         town = document.querySelector('.town'),
         blockquote = document.querySelector('blockquote'),
         figcaption = document.querySelector('figcaption'),
@@ -27,25 +31,47 @@ function addZero(n) {
 
 showTime();
 
+function getDay() {
+    let date = new Date(),
+        dayName = date.getDay();
+        dayNumber = date.getDate(),
+        month = date.getMonth(),
+        year = date.getFullYear();
+
+    const arrDay = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+    const arrMonth = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+    dateNow.innerHTML = `${arrDay[dayName]} ${dayNumber} ${arrMonth[month]} ${year}`;        
+}
+
+getDay();
+
 function setBgGreet() {
     let today = new Date(),
       hour = today.getHours();
   
-    if (hour < 12) {
+    if (hour > 6 && hour < 12) {
       // Morning
       document.body.style.backgroundImage =
-        "url('https://i.ibb.co/7vDLJFb/morning.jpg')";
-      //greeting.textContent = 'Good Morning, ';
-    } else if (hour < 18) {
+        "url('images/morning.jpg')";
+      greeting.textContent = 'Доброе утро, ';
+      document.body.style.color = 'black';
+    } else if (hour > 12 && hour < 18) {
       // Afternoon
       document.body.style.backgroundImage =
-        "url('https://i.ibb.co/3mThcXc/afternoon.jpg')";
-      //greeting.textContent = 'Good Afternoon, ';
-    } else {
+        "url('images/day.jpg')";
+      greeting.textContent = 'Добрый день, ';
+      document.body.style.color = 'white';
+    } else if (hour > 18 && hour < 24) {
       // Evening
       document.body.style.backgroundImage =
-        "url('https://i.ibb.co/924T2Wv/night.jpg')";
-      //greeting.textContent = 'Good Evening, ';
+        "url('images/evening.jpg')";
+      greeting.textContent = 'Добрый вечер, ';
+      document.body.style.color = 'white';
+    } else if (hour > 0 && hour < 6) {
+        document.body.style.backgroundImage =
+        "url('images/night.jpg')";
+      greeting.textContent = 'Доброй ночи, ';
       document.body.style.color = 'white';
     }
   }
@@ -62,7 +88,7 @@ async function getWeather() {
     const res = await fetch(url);
     const data = await res.json();
     
-  
+    weatherIcon.className = 'weather-icon owf';
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
     temperature.textContent = `${Math.ceil(data.main.temp)}°C`;
     weatherDescription.textContent = data.weather[0].description;
@@ -83,7 +109,7 @@ async function getQuote() {
     figcaption.textContent = data.quoteAuthor;
     
   }
-  document.addEventListener('DOMContentLoaded', getQuote);
+  //document.addEventListener('DOMContentLoaded', getQuote);
 
 
 async function getCourse() {
@@ -98,3 +124,55 @@ async function getCourse() {
 }
 
 document.addEventListener('DOMContentLoaded', getCourse);
+
+function getName() {
+    if (localStorage.getItem('name') === null) {
+      name.textContent = '[Enter Name]';
+    } else {
+      name.textContent = localStorage.getItem('name');
+    }
+  }
+
+  getName();
+  
+  // Set Name
+  function setName(e) {
+    if (e.type === 'keypress') {
+      // Make sure enter is pressed
+      if (e.which == 13 || e.keyCode == 13) {
+        localStorage.setItem('name', e.target.innerText);
+        name.blur();
+      }
+    } else {
+      localStorage.setItem('name', e.target.innerText);
+    }
+  }
+  
+  // Get Focus
+  function getFocus() {
+    if (localStorage.getItem('focus') === null) {
+      focus.textContent = '[Enter Focus]';
+    } else {
+      focus.textContent = localStorage.getItem('focus');
+    }
+  }
+
+  getFocus();
+  
+  // Set Focus
+  function setFocus(e) {
+    if (e.type === 'keypress') {
+      // Make sure enter is pressed
+      if (e.which == 13 || e.keyCode == 13) {
+        localStorage.setItem('focus', e.target.innerText);
+        focus.blur();
+      }
+    } else {
+      localStorage.setItem('focus', e.target.innerText);
+    }
+  }
+
+  name.addEventListener('keypress', setName);
+name.addEventListener('blur', setName);
+focus.addEventListener('keypress', setFocus);
+focus.addEventListener('blur', setFocus);
