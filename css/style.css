@@ -1,0 +1,9 @@
+.weather {
+    width: 300px;
+    margin-bottom: 20px;
+    /* height: 300px; */
+}
+
+.weather-icon {
+    font-size: 160px;
+}
