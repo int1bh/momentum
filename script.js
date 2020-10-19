@@ -1,4 +1,5 @@
 const   time = document.querySelector('.time'),
+        town = document.querySelector('.town'),
         blockquote = document.querySelector('blockquote'),
         figcaption = document.querySelector('figcaption'),
         currency = document.querySelector('.currency'),
@@ -51,11 +52,17 @@ function setBgGreet() {
 
   setBgGreet();
 
+async function getTown() {
+    
+}
+
+
 async function getWeather() {
     const locationUrl = `https://ipinfo.io/?token=3b4a9ada9d746b`; 
     const dataLocation = await fetch(locationUrl);
     const location = await dataLocation.json();
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location.city}&lang=ru&appid=35144f3ffd8b50ad98e331dcd36e6fff&units=metric`;
+    town.textContent = location.city;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${town.textContent}&lang=ru&appid=35144f3ffd8b50ad98e331dcd36e6fff&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
     
@@ -66,7 +73,7 @@ async function getWeather() {
     feels_like.textContent = `Ощущается как ${Math.round(data.main.feels_like)}°C`;
     wind.textContent = `Ветер ${Math.floor(data.wind.speed)} м/с`;
     pressure.textContent = `Давление ${Math.ceil(data.main.pressure/1.333)} мм.рт.ст`;
-    humidity.textContent = `Влажность ${data.main.humidity}%`
+    humidity.textContent = `Влажность ${data.main.humidity}%`;
   }
 
   document.addEventListener('DOMContentLoaded', getWeather);
